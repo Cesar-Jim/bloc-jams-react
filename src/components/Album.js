@@ -12,7 +12,19 @@ class Album extends Component {
       this.state = {
          album: album
       };
-   }
+
+      const songs = this.state.album.songs.map( (song, i) => {
+            return (
+               <tr>
+                  <td>{i + 1}</td>
+                  <td key="title">{song.title}</td>
+                  <td key="duration">{song.duration}</td>
+               </tr>
+            )
+      )};
+
+
+   } //constructor
 
    render() {
       return (
@@ -31,9 +43,7 @@ class Album extends Component {
                   <col id="song-title-column" />
                   <col id="song-duration-column" />
                </colgroup>
-               <tbody>
-                  
-               </tbody>
+               <tbody className="songs">{this.state.album.songs}</tbody>
             </table>
          </section>
       );
