@@ -9,37 +9,42 @@ class Album extends Component {
          return album.slug === this.props.match.params.slug
       });
 
+      /*States*/
       this.state = {
          album: album,
          currentSong: album.songs[0],
          isPlaying: false
       };
 
-      // The audio element:
+      /*Audio element definition*/
       this.audioElement = document.createElement('audio');
       this.audioElement.src = album.songs[0].audioSrc;
 
-   } //constructor
+   } /*Constructor ends*/
 
 
+      /*play() method*/
       play() {
          this.audioElement.play();
          this.setState({ isPlaying: true});
       }
 
 
+      /*pause() method*/
       pause() {
          this.audioElement.pause();
          this.setState({ isPlaying: false });
       }
 
 
+      /*setSong() method*/
       setSong(song) {
          this.audioElement.src = song.audioSrc;
          this.setState({ currentSong: song });
       }
 
 
+      /*handleSongClick() method*/
       handleSongClick(song) {
          const isSameSong = this.state.currentSong === song;
 
@@ -76,7 +81,6 @@ class Album extends Component {
                         <td key="title">{song.title}</td>
                         <td key="duration">{song.duration}</td>
                      </tr>
-
                   )}
 
                </tbody>
