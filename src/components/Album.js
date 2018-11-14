@@ -10,10 +10,47 @@ class Album extends Component {
       });
 
       this.state = {
-         album: album
+         album: album,
+         currentSong: album.songs[0],
+         isPlaying: false
       };
 
+      // The audio element:
+      this.audioElement = document.createElement('audio');
+      this.audioElement.src = album.songs[0].audioSrc;
+
    } //constructor
+
+
+      play() {
+         this.audioElement.play();
+         this.setState({ isPlaying: true});
+      }
+
+
+      pause() {
+         this.audioElement.pause();
+         this.setState({ isPlaying: false });
+      }
+
+
+      setSong(song) {
+         this.audioElement.src = song.audioSrc;
+         this.setState({ currentSong: song });
+      }
+
+
+      handleSongClick(song) {
+         const isSameSong = this.state.currentSong === song;
+
+         if (this.state.isPlaying && isSameSong) {
+            this.pause();
+         } else {
+            if (!isSameSong) {this.setSong(song);}
+            this.play();
+         }
+      }
+
 
    render() {
       return (
@@ -34,12 +71,14 @@ class Album extends Component {
                </colgroup>
                <tbody>
                   {this.state.album.songs.map( (song, i) =>
-                     <tr>
+                     <tr className="song" key={i} onClick={() => this.handleSongClick(song)}>
                         <td>{i + 1}</td>
                         <td key="title">{song.title}</td>
                         <td key="duration">{song.duration}</td>
                      </tr>
+
                   )}
+
                </tbody>
             </table>
          </section>
