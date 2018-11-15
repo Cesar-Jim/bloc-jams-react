@@ -89,11 +89,11 @@ class Album extends Component {
                </colgroup>
                <tbody>
                   {this.state.album.songs.map( (song, i) =>
-                     <tr><span className="song" key={i} style={{backgroundColor: this.state.isHover ? "grey" : "white"}} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} onClick={() => this.handleSongClick(song)}>
+                     <tr className="song" key={i} style={{backgroundColor: this.state.isHover ? "grey" : "white"}} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}  onClick={() => this.handleSongClick(song)}>
                         <td>{i + 1}</td>
                         <td key="title">{song.title}</td>
                         <td key="duration">{song.duration}</td>
-                     </span></tr>
+                     </tr>
                   )}
 
                </tbody>
