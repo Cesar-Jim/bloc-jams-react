@@ -13,7 +13,8 @@ class Album extends Component {
       this.state = {
          album: album,
          currentSong: album.songs[0],
-         isPlaying: false
+         isPlaying: false,
+         isHover: false
       };
 
       /*Audio element definition*/
@@ -57,6 +58,18 @@ class Album extends Component {
       }
 
 
+      //handleMouseEnter() method
+      handleMouseEnter = () => {
+         this.setState({isHover: true});
+      }
+
+
+      //handleMouseLeave() method
+      handleMouseLeave = () => {
+         this.setState({isHover: false});
+      }
+
+
    render() {
       return (
          <section className="album">
@@ -76,11 +89,11 @@ class Album extends Component {
                </colgroup>
                <tbody>
                   {this.state.album.songs.map( (song, i) =>
-                     <tr className="song" key={i} onClick={() => this.handleSongClick(song)}>
+                     <tr><span className="song" key={i} style={{backgroundColor: this.state.isHover ? "grey" : "white"}} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} onClick={() => this.handleSongClick(song)}>
                         <td>{i + 1}</td>
                         <td key="title">{song.title}</td>
                         <td key="duration">{song.duration}</td>
-                     </tr>
+                     </span></tr>
                   )}
 
                </tbody>
