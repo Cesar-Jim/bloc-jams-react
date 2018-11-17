@@ -9,7 +9,7 @@ class Album extends Component {
          return album.slug === this.props.match.params.slug
       });
 
-      /*States*/
+      // States
       this.state = {
          album: album,
          currentSong: album.songs[0],
@@ -17,40 +17,45 @@ class Album extends Component {
          isHover: false
       };
 
-      /*Audio element definition*/
+      // Audio element definition
       this.audioElement = document.createElement('audio');
       this.audioElement.src = album.songs[0].audioSrc;
 
-   } /*Constructor ends*/
+   } // Close constructor
 
 
-      /*play() method*/
+      // play method definition
       play() {
          this.audioElement.play();
-         this.setState({ isPlaying: true});
+         this.setState({
+            isPlaying: true
+         });
       }
 
 
-      /*pause() method*/
+      // pause method definition
       pause() {
          this.audioElement.pause();
-         this.setState({ isPlaying: false });
+         this.setState({
+            isPlaying: false,
+         });
       }
 
 
-      /*setSong() method*/
+      // setSong method definition
       setSong(song) {
          this.audioElement.src = song.audioSrc;
          this.setState({ currentSong: song });
       }
 
 
-      /*handleSongClick() method*/
+      // handleSongClick method definition
       handleSongClick(song) {
          const isSameSong = this.state.currentSong === song;
 
          if (this.state.isPlaying && isSameSong) {
             this.pause();
+
          } else {
             if (!isSameSong) {this.setSong(song);}
             this.play();
@@ -58,19 +63,65 @@ class Album extends Component {
       }
 
 
-      //handleMouseEnter() method
-      handleMouseEnter = () => {
-         this.setState({isHover: true});
+      handleMouseEnter = (song, index) => {
+         console.log('Hover IN');
+         this.setState({
+            isHover: true
+         });
+
+         const msg = "ion-play";
+
+         return(
+            msg
+         );
+         
       }
 
-
-      //handleMouseLeave() method
-      handleMouseLeave = () => {
-         this.setState({isHover: false});
+      handleMouseLeave() {
+         console.log('Hover OUT');
+         this.setState({
+            isHover: false
+         });
+         
       }
+
+      // //handleMouseEnter() method
+      // handleMouseEnter = (song, index) => {
+      //    this.setState({isHover: true});
+      // }
+
+
+      // //handleMouseLeave() method
+      // handleMouseLeave = () => {
+      //    this.setState({isHover: false});
+      // }
+
+
+      // displayIcon(song, index) {
+      //
+      //    if (this.state.isHover && !this.state.isPlaying && !this.state.isPaused) { // Playing:N Paused:N Hover:Y
+      //       return (
+      //          <span className="ion-play"></span>
+      //       );
+      //    }else{
+      //       return (
+      //          <span>{index + 1}</span>
+      //       );
+      //    }
+      // }
 
 
    render() {
+      var msg = "";
+
+      if (this.state.isHover && !this.state.isPlaying) {
+         msg = "ion-play";
+      }
+
+      if (this.state.isPlaying) {
+         msg = "ion-pause";
+      }
+
       return (
          <section className="album">
             <section id="album-info">
@@ -88,14 +139,17 @@ class Album extends Component {
                   <col id="song-duration-column" />
                </colgroup>
                <tbody>
-                  {this.state.album.songs.map( (song, i) =>
-                     <tr className="song" key={i} style={{backgroundColor: this.state.isHover ? "grey" : "white"}} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}  onClick={() => this.handleSongClick(song)}>
-                        <td>{i + 1}</td>
+                  {this.state.album.songs.map( (song, index) =>
+                     <tr className="song" 
+                     key={index} 
+                     onClick={() => this.handleSongClick(song)} 
+                     onMouseEnter={() => this.handleMouseEnter(song, index)}
+                     >
+                        <td className={msg}>{index + 1}</td>
                         <td key="title">{song.title}</td>
                         <td key="duration">{song.duration}</td>
                      </tr>
                   )}
-
                </tbody>
             </table>
          </section>
