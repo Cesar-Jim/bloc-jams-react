@@ -9,48 +9,54 @@ class Album extends Component {
          return album.slug === this.props.match.params.slug
       });
 
-      // States
+      // Initial states:
       this.state = {
          album: album,
          currentSong: album.songs[0],
          isPlaying: false,
-         isHover: false
+         isHovering: null,
+         init: true // this state is only used for the initial state of the song list (all index numbers are displayed)
       };
 
-      // Audio element definition
+      // audioElement definition
       this.audioElement = document.createElement('audio');
       this.audioElement.src = album.songs[0].audioSrc;
 
-   } // Close constructor
+   }  // constructor ends
 
 
-      // play method definition
+      // play method
       play() {
+
          this.audioElement.play();
          this.setState({
-            isPlaying: true
+            isPlaying: true,
+            init: false
          });
       }
 
 
-      // pause method definition
+      // pause method
       pause() {
+
          this.audioElement.pause();
          this.setState({
-            isPlaying: false,
+            isPlaying: false
          });
       }
 
 
-      // setSong method definition
+      // setSong method
       setSong(song) {
+
          this.audioElement.src = song.audioSrc;
          this.setState({ currentSong: song });
       }
 
 
-      // handleSongClick method definition
+      // handleSongClick method 
       handleSongClick(song) {
+
          const isSameSong = this.state.currentSong === song;
 
          if (this.state.isPlaying && isSameSong) {
@@ -63,65 +69,51 @@ class Album extends Component {
       }
 
 
-      handleMouseEnter = (song, index) => {
-         console.log('Hover IN');
-         this.setState({
-            isHover: true
-         });
-
-         const msg = "ion-play";
-
-         return(
-            msg
-         );
+      // handleMouseEnter method
+      handleMouseEnter(index){
          
+         this.setState ({
+            isHovering: this.state.album.songs[index]
+         });
       }
-
+    
+    
+      // handleMouseLeave method
       handleMouseLeave() {
-         console.log('Hover OUT');
+
          this.setState({
-            isHover: false
-         });
-         
+            isHovering: null
+         }); 
       }
 
-      // //handleMouseEnter() method
-      // handleMouseEnter = (song, index) => {
-      //    this.setState({isHover: true});
-      // }
 
+      // handleIconsDisplay method
+      handleIconsDisplay(song, index){
 
-      // //handleMouseLeave() method
-      // handleMouseLeave = () => {
-      //    this.setState({isHover: false});
-      // }
+         if (!this.state.isHovering && this.state.isPlaying && this.state.currentSong === song){ 
+               
+            return(<span className="ion-pause"></span>);   // The currently playing song displays a "pause" button in place of the song number.
+          
+         } else if (this.state.currentSong === song && this.state.isPlaying) {
+            
+            return(<span className="ion-pause"></span>); // Holds pause icon
+            
+         } else if (this.state.isHovering === this.state.album.songs[index]) {
+            
+            return(<span className="ion-play"></span>); // When I hover over a song, it displays a "play" button in place of the song number.
 
+         } else if (!this.state.isPlaying && this.state.currentSong === this.state.album.songs[index] && !this.state.init) {
 
-      // displayIcon(song, index) {
-      //
-      //    if (this.state.isHover && !this.state.isPlaying && !this.state.isPaused) { // Playing:N Paused:N Hover:Y
-      //       return (
-      //          <span className="ion-play"></span>
-      //       );
-      //    }else{
-      //       return (
-      //          <span>{index + 1}</span>
-      //       );
-      //    }
-      // }
-
+            return(<span className="ion-play"></span>); // A paused song displays a "play" button in place of the song number.
+         
+         }  else {
+         
+            return(<span>{index + 1}</span>); // Returns the song index number + 1
+         }
+         
+      }
 
    render() {
-      var msg = "";
-
-      if (this.state.isHover && !this.state.isPlaying) {
-         msg = "ion-play";
-      }
-
-      if (this.state.isPlaying) {
-         msg = "ion-pause";
-      }
-
       return (
          <section className="album">
             <section id="album-info">
@@ -140,12 +132,13 @@ class Album extends Component {
                </colgroup>
                <tbody>
                   {this.state.album.songs.map( (song, index) =>
-                     <tr className="song" 
-                     key={index} 
-                     onClick={() => this.handleSongClick(song)} 
-                     onMouseEnter={() => this.handleMouseEnter(song, index)}
-                     >
-                        <td className={msg}>{index + 1}</td>
+                     <tr className="song"
+                        key={index} 
+                        onClick={() => this.handleSongClick(song)} 
+                        onMouseEnter={() => this.handleMouseEnter(index)}
+                        onMouseLeave={() => this.handleMouseLeave()}
+                     >   
+                        <td>{this.handleIconsDisplay(song, index)}</td>
                         <td key="title">{song.title}</td>
                         <td key="duration">{song.duration}</td>
                      </tr>
