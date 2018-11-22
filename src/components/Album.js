@@ -18,12 +18,14 @@ class Album extends Component {
          duration: album.songs[0].duration,
          isPlaying: false,
          isHovering: null,
+         volume: 0.2,
          init: true // this state is only used for the initial state of the song list (all index numbers are displayed)
       };
 
       // audioElement definition
       this.audioElement = document.createElement('audio');
       this.audioElement.src = album.songs[0].audioSrc;
+      this.audioElement.volume = this.state.volume;
 
    }  // constructor ends
 
@@ -58,6 +60,7 @@ class Album extends Component {
             durationchange: e => {
                this.setState({ duration: this.audioElement.duration });
             }
+           
          };
          this.audioElement.addEventListener('timeupdate', this.eventListeners.timeupdate);
          this.audioElement.addEventListener('durationchange', this.eventListeners.durationchange);
@@ -121,9 +124,39 @@ class Album extends Component {
       // handleTimeChange method
       handleTimeChange(e) {
          const newTime = this.audioElement.duration * e.target.value;
-
+    
          this.audioElement.currentTime = newTime;
          this.setState({ currentTime: newTime });
+      }
+
+
+      // formatTime method
+      formatTime(timeInSec) {
+
+         if (!isNaN(timeInSec)) {
+
+            let minutes = Math.trunc(timeInSec / 60);
+            let seconds = Math.floor(((timeInSec / 60) - Math.trunc(timeInSec / 60)) * 60);
+            let zero = "0";
+
+            seconds > 9 ? zero="" : zero="0";
+            let formattedTime = minutes + ':' + zero + seconds;   // typeof string formatted to 'M:SS'
+
+            return (formattedTime);
+              
+         } else {
+
+            return ("-:--")
+         }
+      }
+
+
+      // handleVolumeChange method
+      handleVolumeChange(e) {
+         const newVolume = e.target.value;
+
+         this.setState({ volume: newVolume });
+         this.audioElement.volume = e.target.value;
       }
 
 
@@ -204,14 +237,17 @@ class Album extends Component {
                </tbody>
             </table>
             <PlayerBar 
-               isPlaying={this.state.isPlaying} 
+               isPlaying={this.state.isPlaying}
+               volume={this.state.volume}
                currentSong={this.state.currentSong}
-               currentTime={this.audioElement.currentTime}
-               duration={this.audioElement.duration}
+               currentTime={this.formatTime(this.audioElement.currentTime)}
+               duration={this.formatTime(this.audioElement.duration)}
                handleSongClick={() => this.handleSongClick(this.state.currentSong)}
                handlePrevClick={() => this.handlePrevClick()}
                handleNextClick={() => this.handleNextClick()}
                handleTimeChange={(e) => this.handleTimeChange(e)}
+               handleVolumeChange={(e) => this.handleVolumeChange(e)}
+               formatTime={() => this.formatTime()}
             />
          </section>
       );
