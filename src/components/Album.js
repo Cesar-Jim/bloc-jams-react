@@ -240,14 +240,14 @@ class Album extends Component {
                isPlaying={this.state.isPlaying}
                volume={this.state.volume}
                currentSong={this.state.currentSong}
-               currentTime={this.formatTime(this.audioElement.currentTime)}
-               duration={this.formatTime(this.audioElement.duration)}
+               currentTime={this.audioElement.currentTime}
+               duration={this.audioElement.duration}
                handleSongClick={() => this.handleSongClick(this.state.currentSong)}
                handlePrevClick={() => this.handlePrevClick()}
                handleNextClick={() => this.handleNextClick()}
                handleTimeChange={(e) => this.handleTimeChange(e)}
                handleVolumeChange={(e) => this.handleVolumeChange(e)}
-               formatTime={() => this.formatTime()}
+               formatTime={this.formatTime}
             />
          </section>
       );
