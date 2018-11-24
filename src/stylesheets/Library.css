@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Lato');
 
   /***********/
  /* CLASSES */
@@ -12,11 +12,14 @@
     align-items: center;
     margin-top: 50px;
     opacity: .9;
+    -webkit-box-shadow: 16px 12px 45px 1px rgba(0,0,0,0.5);
+    -moz-box-shadow: 16px 12px 45px 1px rgba(0,0,0,0.5);
+    box-shadow: 16px 12px 45px 1px rgba(0,0,0,0.5);
 }
 
 .album-container{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     height: 500px;
@@ -27,15 +30,28 @@
 .album-info-container{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     color: white;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+    font-size: 22px;
+    font-weight: 100;
     text-decoration: none;
     line-height: 1.5em;
     height: 150px;
     margin-left: 25px;
+    text-shadow: 2px 2px 1px #131313;
+    margin-left: 65px;
+}
+
+
+a{
+    text-decoration: none;
+}
+
+
+.album-info-container:hover{
+    text-decoration: underline;
 }
 
 

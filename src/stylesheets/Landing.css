@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Mandali');
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond');
 @import url('https://fonts.googleapis.com/css?family=Finger+Paint');
 
 
@@ -12,7 +12,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    background-image: url("/assets/images/landing_images/wall3.jpg");
+    background-image: url("/assets/images/landing_images/wall.jpg");
     background-size: 150%;
     width: 800px;
     margin-right: auto;
@@ -76,15 +76,15 @@
 
 .point-title-1, .point-title-2, .point-title-3{
     color: #ffffff;
-    margin-top: 0px;
-    height: 220px;
-    width: 800px;
-    text-shadow: 3px 3px 3px #101010;
     text-align: center;
-    word-spacing: .15em;
     font-family: 'Finger Paint', cursive;
-    font-size: 46px;
-    font-weight: 600;
+    font-weight: 400;
+    font-size: 54px;
+    text-shadow: 2px 2px 8px #101010;
+    height: 240px;
+    width: 800px;
+    margin-top: 0px;
+    margin-bottom: 0px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -94,34 +94,35 @@
 .point-description-1, .point-description-2{
 
     width: 800px;
-    font-family: 'Mandali', sans-serif;
-    font-size: 30px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size:34px;
     font-weight: 600;
-    color: #ffffff;
+    color: #a2fdff;
     background-color: #656277e1;
     text-align: center;
-    line-height: 2em;
+    line-height: 1.5em;
     height: 210px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 0;
+    text-shadow: 1px 1px 5px #000000;
 }
 
 
 .point-description-3{
     width: 800px;
-    font-family: 'Mandali', sans-serif;
-    font-size: 30px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
     font-weight: 600;
-    color: #ffffff;
+    color: #a2fdff;
     background-color: #656277e1;
     text-align: center;
-    line-height: 2em;
+    line-height: 1.5em;
     height: 210px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 0;
-    border-radius: 0px 0px 40px 40px;
+    text-shadow: 1px 1px 5px #000000;
 }

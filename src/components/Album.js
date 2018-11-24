@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import albumData from './../data/albums';
 import PlayerBar from './PlayerBar';
+import '../stylesheets/Album.css';
 
 class Album extends Component {
    constructor(props) {
@@ -207,7 +208,7 @@ class Album extends Component {
    render() {
       return (
          <section className="album">
-            <section id="album-info">
+            <section className="album-info">
                <img id="album-cover-art" src={this.state.album.albumCover} alt={this.state.album.title}/>
                <div className="album-details">
                   <h1 id="album-title">{this.state.album.title}</h1>
@@ -231,12 +232,12 @@ class Album extends Component {
                      >   
                         <td>{this.handleIconsDisplay(song, index)}</td>
                         <td key="title">{song.title}</td>
-                        <td key="duration">{song.duration}</td>
+                        <td key="duration">{this.formatTime(song.duration)}</td>
                      </tr>
                   )}
                </tbody>
             </table>
-            <PlayerBar 
+            <PlayerBar
                isPlaying={this.state.isPlaying}
                volume={this.state.volume}
                currentSong={this.state.currentSong}
