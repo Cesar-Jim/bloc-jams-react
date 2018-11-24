@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Special+Elite');
+
+  /********/
+ /* TAGS */
+/********/
+nav{
+  flex: 1;
+  text-align: center;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+  /***********/
+ /* CLASSES */
+/***********/
+.top-bar-container{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #bdbcc2;
+}
+
+.footer{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 75px;
+  height: 150px;
+}
+
+
+.landing-link, .library-link{
+  text-decoration: none;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+
+.landing-link:hover, .library-link:hover{
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+
+:visited{
+  color: #353535;
+  text-decoration: underline;
+}
+
+
+#separator{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+
+.main-title-container{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+
+.bloc-jams-title{
+  flex: 3;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-size: 90px;
+  font-family: 'Special Elite', cursive;
+  color: #353535;
+}
+
