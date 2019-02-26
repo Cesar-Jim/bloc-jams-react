@@ -1,3 +1,5 @@
+![MERN](https://www.dropbox.com/s/huinvt0imtgyvu9/jams.PNG?raw=true "JAMS!")
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
