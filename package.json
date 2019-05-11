@@ -2,7 +2,7 @@
   "name": "bloc-jams-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://Cesar-Jim.github.io/Bloc-Jams-Site",
+  "homepage": "http://cesar-jim.github.io/Bloc-Jams-Site",
   "dependencies": {
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
